@@ -860,6 +860,10 @@ button.btn { font: inherit; letter-spacing: 0.08em; text-transform: uppercase; f
   gap: 0.8rem;
 }
 
+.buy-cta .btn {
+  min-width: 8.5rem;
+}
+
 /* Footer */
 .footer {
   border-top: 0;
@@ -1052,8 +1056,13 @@ button.btn { font: inherit; letter-spacing: 0.08em; text-transform: uppercase; f
 
   .nav-socials {
     margin: 0;
-    padding: 0.8rem 1.4rem;
+    padding: 0.35rem 1.4rem 0.6rem;
     border: 0;
+    gap: 1.3rem;
+  }
+
+  .nav-socials a {
+    padding: 0.45rem 0;
   }
 
   .nav-toggle { display: flex; }

@@ -2,7 +2,8 @@ const CONFIG = {
   tokenAddress: "",
   pumpFunUrl: "",
   instagram: "https://www.instagram.com/jiffpom/",
-  telegram: "",
+  x: "https://x.com/jiffpom_x",
+  telegram: "https://t.me/jiffpom_tg",
 };
 
 function getPumpFunUrl() {
@@ -75,6 +76,10 @@ function initSocialLinks() {
 
   document.querySelectorAll("[data-telegram]").forEach((el) => {
     if (CONFIG.telegram) el.href = CONFIG.telegram;
+  });
+
+  document.querySelectorAll("[data-x]").forEach((el) => {
+    if (CONFIG.x) el.href = CONFIG.x;
   });
 
   document.querySelectorAll("[data-instagram]").forEach((el) => {
