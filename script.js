@@ -1,7 +1,7 @@
 const CONFIG = {
-  tokenAddress: "9rzRfWAFzjkV7HMm36M1ZSh7JUf4S8pw6UeZdPdLpump",
+  tokenAddress: "",
   pumpFunUrl: "",
-  twitter: "https://x.com/trumponsol_x",
+  instagram: "https://www.instagram.com/jiffpom/",
   telegram: "",
 };
 
@@ -54,12 +54,14 @@ function initNav() {
   toggle.addEventListener("click", () => {
     const open = links.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open);
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   });
 
   links.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", () => {
       links.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
     });
   });
 }
@@ -75,13 +77,36 @@ function initSocialLinks() {
     if (CONFIG.telegram) el.href = CONFIG.telegram;
   });
 
-  document.querySelectorAll("[data-twitter]").forEach((el) => {
-    if (CONFIG.twitter) el.href = CONFIG.twitter;
+  document.querySelectorAll("[data-instagram]").forEach((el) => {
+    if (CONFIG.instagram) el.href = CONFIG.instagram;
   });
+}
+
+function initReveal() {
+  const nodes = document.querySelectorAll(".reveal");
+  if (!nodes.length) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    nodes.forEach((node) => node.classList.add("in"));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  nodes.forEach((node) => io.observe(node));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   initContract();
   initNav();
   initSocialLinks();
+  initReveal();
 });
